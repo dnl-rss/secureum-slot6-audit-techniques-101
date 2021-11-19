@@ -1,18 +1,19 @@
 ### 33. Slither
 
-*Slither* is a Solidity static analysis framework written in Python 3.
+[Slither](https://github.com/crytic/slither) is a Solidity static analysis framework written in Python 3.
 - runs a suite of vulnerability detectors, prints visual information about contract details, and provides an API to easily write custom analyses.
 - enables developers to find vulnerabilities, enhance their code comprehension, and quickly prototype custom analyses.
-- implements 74 detectors in the publicly available free version (with trophies that showcase Slither findings in real-world contracts).
+- implements 74 [detectors](https://github.com/crytic/slither#detectors) in the publicly available free version
+- [trophies](https://github.com/crytic/slither/blob/master/trophies.md) showcase Slither findings in real-world contracts
 
 ### 34. Slither features:
 
 - *Detects vulnerable Solidity code* with low false positives
-- *Identifies where the error condition occurs* in the source code
+- *Identifies where error conditions occur* in the source code
 - Easily integrates into *continuous integration* and Truffle builds
 - Built-in 'printers' quickly *report crucial contract information*
 - Detector API to write *custom analyses* in Python
-- Ability to analyze contracts written with `version >= 0.4`
+- Ability to analyze contracts written with `version >=0.4`
 - Intermediate representation (SlithIR) enables simple, high-precision analyses
 - Correctly parses **99.9%** of all public Solidity code
 - Average execution time of less than *1 second per contract*
@@ -52,12 +53,12 @@ Slither printers allow printing contract information with `--print` and followin
 
 ### 37. Slither upgradability
 
-Slither upgradeability checks helps review contracts that use the delegatecall proxy pattern using `slither-check-upgradeability` tool with following options:
+Slither upgradeability checks helps review contracts that use the `delegatecall` proxy pattern using `slither-check-upgradeability` tool with following options:
 - `became-constant`: Variables that should not be constant
 - `function-id-collision`: Functions ids collision
 - `function-shadowing`: Functions shadowing
 - `missing-calls`: Missing calls to init functions
-- `missing-init-modifier`: initializer() is not called
+- `missing-init-modifier`: `initializer()` is not called
 - `multiple-calls`: Init functions called multiple times
 - `order-vars-contracts`: Incorrect vars order with the v2
 - `order-vars-proxy`: Incorrect vars order with the proxy
@@ -66,14 +67,14 @@ Slither upgradeability checks helps review contracts that use the delegatecall p
 - `extra-vars-proxy`: Extra vars in the proxy
 - `missing-variables`: Variable missing in the v2
 - `extra-vars-v2`: Extra vars in the v2
-- `init-inherited`: Initializable is not inherited
-- `init-missing`: Initializable is missing
+- `init-inherited`: `Initializable` is not inherited
+- `init-missing`: `Initializable` is missing
 - `initialize-target`: Initialize function that must be called
-- `initializer-missing`: initializer() is missing
+- `initializer-missing`: `initializer()` is missing
 
 ### 38. Slither code similarity
 
-Slither code *similarity detector* (a research-oriented tool) uses state-of-the-art machine learning to detect similar (vulnerable) Solidity functions
+Slither code *similarity detector*, [slither-simil](https://blog.trailofbits.com/2020/10/23/efficient-audits-with-machine-learning-and-slither-simil/), is a research-oriented tool that uses state-of-the-art machine learning to detect similar (vulnerable) Solidity functions
 - uses a pre-trained model from `etherscan_verified_contracts` with 60,000 contracts and more than 850,000 functions
 - uses FastText, a vector embedding technique, to generate compact numerical representations of every function
 - has four modes:
@@ -118,6 +119,36 @@ Slither ERC conformance tool `slither-check-erc` checks the following for ERC's 
 - [ ] The functions emit the events
 - [ ] Derived contracts do not break the conformance
 
+Results of `slither-check-erc` on USDT (0xdAC17F958D2ee523a2206206994597C13D831ec7) via Open Zeppelin's [interface](https://erc20-verifier.openzeppelin.com/)
+
+```
+== ERC20 functions definition ==
+[x] transfer (address, uint256) -> (bool)
+[x] approve (address, uint256) -> (bool)
+[x] transferFrom (address, address, uint256) -> (bool)
+[✓] allowance (address, address) -> (uint256)
+[✓] balanceOf (address) -> (uint256)
+
+== Custom modifiers ==
+[✓] No custom modifiers in ERC20 functions
+
+== ERC20 events ==
+[✓] Transfer (address, address, uint256)
+[✓] Approval (address, address, uint256)
+
+== ERC20 getters ==
+[✓] totalSupply () -> (uint256)
+[x] decimals () -> (uint8)
+[✓] symbol () -> (string)
+[✓] name () -> (string)
+
+== Allowance frontrunning mitigation ==
+[x] increaseAllowance (address, uint256) -> (bool)
+[x] decreaseAllowance (address, uint256) -> (bool)
+
+== Balance check in approve function ==
+[✓] approve function should not check for sender's balance
+```
 ### 42. Slither property generation
 
 Slither property generation tool `slither-prop` generates code properties (e.g., invariants) that can be tested with unit tests or Echidna, entirely automatically.
@@ -129,6 +160,20 @@ The `ERC20` scenarios that can be tested are:
 - `NotMintableNotBurnable`: Test that no one can mint or burn tokens
 - `NotBurnable`: Test that no one can burn tokens
 - `Burnable`: Test the burn of tokens. Require the `burn(address) returns()` function
+
+Running the command `slither-prop TetherToken.sol --contract TetherToken` locally produces several output files for Echidna:
+
+```
+Write interfaces.sol
+Write PropertiesTetherTokenTransferable.sol
+Write TestTetherTokenTransferable.sol
+Write echidna_config.yaml
+################################################
+Update the constructor in TestTetherTokenTransferable.sol
+To run Echidna:
+	 echidna-test TetherToken.sol --contract TestTetherTokenTransferable --config echidna_config.yaml
+`
+```
 
 ### 43. Slither new detectors  
 
