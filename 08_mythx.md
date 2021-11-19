@@ -1,26 +1,30 @@
 ### 56. MythX
 
-MythX is a powerful security analysis service that finds Solidity vulnerabilities in your Ethereum smart contract code during your development life cycle. It is a paid API-based service which uses several tools on the backend including a static analyzer (Maru), symbolic analyzer (Mythril) and a greybox fuzzer (Harvey) to implement a total of 46 detectors. Mythril is the open-source component of MythX.
+[MythX](https://mythx.io/) is a powerful security analysis service that finds Solidity vulnerabilities in your Ethereum smart contract code during your development life cycle.
+
+It is a paid API-based service which uses several tools on the backend implementing 46 [detectors](https://mythx.io/detectors/) including a:
+- static analyzer (Maru)
+- symbolic analyzer (Mythril)
+- greybox fuzzer (Harvey)
+
+Mythril is the open-source component of MythX.
 
 ### 57. MythX process:
 
-1. Submit your code: The analysis requests are encrypted with TLS and the code you submit is accessed only by you. Submit both the source code and the compiled bytecode of your smart contracts for best results.
-2. Activate a full suite of analysis techniques: The longer MythX runs, the more it can detect more security weaknesses.
-3. Receive a detailed analysis report: MythX detects a majority of vulnerabilities listed in the SWC Registry. The report will return a listing of all the weaknesses found in your code, including the exact position of the issue and its SWC ID. Reports generated can be only accessed by you. MythX offers 3 scan modes, quick, standard and deep. You can see the differences here.
+1. **Submit your code**: The analysis requests are encrypted with TLS and the code you submit is accessed only by you. Submit both the source code and the compiled bytecode of your smart contracts for best results.
+2. **Activate a full suite of analysis techniques**: The longer MythX runs, the more it can detect more security weaknesses.
+3. **Receive a detailed analysis report**: MythX detects a majority of vulnerabilities listed in the SWC Registry. The report will return a listing of all the weaknesses found in your code, including the exact position of the issue and its SWC ID. Reports generated can be only accessed by you. MythX offers 3 scan modes, quick, standard and deep.
 
 ### 58. MythX tools:
 
 When you submit your code to the API it gets analyzed by multiple microservices in parallel where these tools cooperate to return the more comprehensive results in the execution time provided.
-
-A static analyzer that parses the Solidity AST
-
-a symbolic analyzer that detects possible vulnerable states, and
-
-a greybox fuzzer that detects vulnerable execution paths
+1. A static analyzer that parses the Solidity AST
+2. A symbolic analyzer that detects possible vulnerable states
+3. A greybox fuzzer that detects vulnerable execution paths
 
 ### 59. MythX coverage:
 
-*MythX* extends to most SWCs found in the SWC Registry with the 46 detectors listed here along with the type of analysis used.
+*MythX* extends to most SWCs found in the [SWC Registry](https://swcregistry.io/) with 46 detectors along with the type of analysis used.
 
 ### 60. MythX SaaS
 
