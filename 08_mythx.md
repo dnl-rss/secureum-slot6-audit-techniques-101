@@ -57,7 +57,7 @@ MythX official integrations, tools, and libraries include:
 ### 64. MythX pricing:
 
 | Package | Price | Scans | Description |
-| - | - | - |
+| - | - | - | - |
 | On Demand | US$9.99/3 scans | On Demand | All scan modes and Prepaid scan packs |
 | Developer | US$49/mo | 500 scans/month | Quick and Standard scan modes |
 | Professional | US$249/mo | 10000 scans/month | All scan modes |
